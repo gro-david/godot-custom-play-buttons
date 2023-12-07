@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuesimtml7ut7"]
+
+[ext_resource type="Script" path="res://addons/custom_play_buttons/scripts/panel_container.gd" id="1_y5quf"]
+[ext_resource type="Script" path="res://addons/custom_play_buttons/scripts/window_head_container.gd" id="2_4de2y"]
+[ext_resource type="Texture2D" uid="uid://cukcrgqcdj3ca" path="res://addons/custom_play_buttons/icons/add.png" id="3_al4dh"]
+[ext_resource type="Texture2D" uid="uid://cndw6vxbcowfl" path="res://addons/custom_play_buttons/icons/file.png" id="4_tvqah"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hxdrq"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 0.365, 0.365, 1)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_detail = 1
+
+[node name="container" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 32)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hxdrq")
+script = ExtResource("1_y5quf")
+
+[node name="header_container" type="HBoxContainer" parent="."]
+layout_mode = 2
+script = ExtResource("2_4de2y")
+
+[node name="add" type="Button" parent="header_container"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+icon = ExtResource("3_al4dh")
+flat = true
+icon_alignment = 1
+
+[node name="open_filedialog" type="Button" parent="header_container"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+icon = ExtResource("4_tvqah")
+flat = true
+icon_alignment = 1
+
+[node name="filepath" type="LineEdit" parent="header_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Filepath..."
+clear_button_enabled = true
+flat = true
+
+[node name="filedialog" type="FileDialog" parent="header_container"]
+title = "Open a File"
+initial_position = 4
+size = Vector2i(724, 432)
+ok_button_text = "Open"
+dialog_hide_on_ok = true
+file_mode = 0
+filters = PackedStringArray("*.tscn")
+
+[connection signal="pressed" from="header_container/add" to="header_container" method="_on_add_pressed"]
+[connection signal="pressed" from="header_container/open_filedialog" to="header_container" method="_on_open_filedialog_pressed"]
+[connection signal="text_submitted" from="header_container/filepath" to="header_container" method="_on_filepath_text_submitted"]
+[connection signal="visibility_changed" from="header_container/filedialog" to="header_container" method="_on_filedialog_visibility_changed"]

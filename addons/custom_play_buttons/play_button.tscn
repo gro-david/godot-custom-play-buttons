@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://l1q3vf5xd4xl"]
+
+[ext_resource type="Texture2D" uid="uid://du5n04y8cjrvm" path="res://addons/custom_play_buttons/icons/play.png" id="1_0nqbv"]
+[ext_resource type="Script" path="res://addons/custom_play_buttons/scripts/custom_play_btn.gd" id="2_uwxl0"]
+
+[node name="play_button" type="Button"]
+custom_minimum_size = Vector2(32, 32)
+offset_left = -36.0
+offset_right = -4.0
+offset_bottom = 32.0
+size_flags_horizontal = 6
+size_flags_vertical = 4
+icon = ExtResource("1_0nqbv")
+flat = true
+icon_alignment = 1
+script = ExtResource("2_uwxl0")
+metadata/custom_play_button = true
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://bp0i0y6duwxiq"]
+
+[ext_resource type="Texture2D" uid="uid://bdvkbxm338mrf" path="res://addons/custom_play_buttons/icons/edit.png" id="1_oy4od"]
+[ext_resource type="Script" path="res://addons/custom_play_buttons/scripts/holder.gd" id="2_hgf4u"]
+[ext_resource type="Script" path="res://addons/custom_play_buttons/scripts/settings_btn.gd" id="4_cpsof"]
+[ext_resource type="PackedScene" uid="uid://cuesimtml7ut7" path="res://addons/custom_play_buttons/window_header.tscn" id="4_o4bls"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vtokx"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 0.365, 0.365, 1)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_detail = 1
+
+[sub_resource type="Theme" id="Theme_vyxd4"]
+BoxContainer/constants/separation = 4
+
+[node name="PanelContainer" type="PanelContainer"]
+offset_right = 68.0
+offset_bottom = 32.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vtokx")
+script = ExtResource("2_hgf4u")
+
+[node name="play_button_holder" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme = SubResource("Theme_vyxd4")
+alignment = 2
+
+[node name="settings_btn" type="Button" parent="play_button_holder"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+tooltip_text = "Edit the custom play buttons."
+icon = ExtResource("1_oy4od")
+flat = true
+icon_alignment = 1
+script = ExtResource("4_cpsof")
+
+[node name="window" type="Window" parent="."]
+initial_position = 4
+size = Vector2i(724, 432)
+visible = false
+
+[node name="container" type="PanelContainer" parent="window"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vtokx")
+metadata/_edit_use_anchors_ = true
+
+[node name="play_button_config_holder" type="VBoxContainer" parent="window/container"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="container" parent="window/container/play_button_config_holder" instance=ExtResource("4_o4bls")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vtokx")
+
+[connection signal="pressed" from="play_button_holder/settings_btn" to="play_button_holder/settings_btn" method="_on_pressed"]
+[connection signal="close_requested" from="window" to="." method="_on_window_close_requested"]

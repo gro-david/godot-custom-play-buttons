@@ -1,0 +1,23 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Custom Play Button"
+config/features=PackedStringArray("4.2")
+config/icon="res://addons/custom_play_buttons/icon.svg"
+
+[display]
+
+window/subwindows/embed_subwindows=false
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/custom_play_buttons/plugin.cfg", "res://addons/explore-editor-theme/plugin.cfg")
